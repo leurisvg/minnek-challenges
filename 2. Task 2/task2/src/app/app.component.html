@@ -1,0 +1,36 @@
+<h1>Dog List</h1>
+
+<ng-template #loading>
+	<h2>Loading...</h2>
+</ng-template>
+
+<ng-container *ngIf="dogsBreeds != null; else loading">
+
+	<div class="container">
+
+		<div *ngFor="let breed of dogsBreeds! | keyvalue">
+
+			<div class="img-container">
+				<ul class="center">
+					<ng-container *ngIf="breed.value.subbreeds.length > 0; else noSubbreeds">
+						<li
+							*ngFor="let subbreeds of breed.value.subbreeds | slice:0:3"
+						>
+							{{ subbreeds | titlecase }}
+						</li>
+					</ng-container>
+
+					<ng-template #noSubbreeds>
+						<li>No sub-breed</li>
+					</ng-template>
+				</ul>
+
+				<img [src]="breed.value.url" [alt]="breed.key">
+			</div>
+
+			<h3>{{ breed.key | titlecase }}</h3>
+		</div>
+
+	</div>
+
+</ng-container>

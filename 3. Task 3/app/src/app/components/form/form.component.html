@@ -1,0 +1,49 @@
+<div class="row justify-content-center mt-4">
+
+	<div class="col-11 col-sm-8 col-md-5 col-xl-4 col-xxl-3">
+		<h3>Add Product</h3>
+
+		<Form autocomplete="off" [formGroup]="form" (ngSubmit)="submit()">
+
+			<label class="form-label mt-4">Name</label>
+			<input type="text" class="form-control" formControlName="name">
+
+			<div *ngIf="invalidField('name')">
+				<p class="text-danger m-0">This field is required</p>
+			</div>
+
+			<label class="form-label mt-3">Price</label>
+			<input type="number" class="form-control" formControlName="price">
+
+			<div *ngIf="invalidField('price')">
+				<p class="text-danger m-0">This field is required</p>
+			</div>
+
+			<label class="form-label mt-3">Description</label>
+			<input type="text" class="form-control" formControlName="description">
+
+			<div *ngIf="invalidField('description')">
+				<p class="text-danger m-0">This field is required</p>
+			</div>
+
+			<label class="form-label mt-3">Image</label>
+			<input type="file" class="form-control" (change)="selectImage($event)" #inputFile>
+
+			<div *ngIf="imageInputError">
+				<p class="text-danger m-0">This field is required</p>
+			</div>
+
+			<button type="submit" [disabled]="form.disabled" class="btn btn-primary mt-3 float-end">
+
+				<span *ngIf="form.enabled; else loading">Submit</span>
+
+				<ng-template #loading>
+					<app-loading></app-loading>
+				</ng-template>
+
+			</button>
+
+		</Form>
+	</div>
+
+</div>

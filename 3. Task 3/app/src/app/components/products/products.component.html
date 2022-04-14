@@ -1,0 +1,23 @@
+<div *ngIf="products.length > 0" class="row justify-content-center mt-5">
+	<carousel
+		[height]="400"
+		[width]="1000"
+		[cellWidth]="300"
+	>
+		<div *ngFor="let product of products" class="carousel-cell">
+
+			<div>
+				<img [src]="product.image.data" [alt]="product.name">
+				<h4 class="text-center mt-1">{{ product.name }}</h4>
+				<p class="text-center mb-1">{{ product.price | currency }}</p>
+				<p class="text-center mb-0">{{ product.description }}</p>
+			</div>
+
+		</div>
+	</carousel>
+</div>
+
+<h2 *ngIf="loading" class="text-center mt-5">Loading...</h2>
+
+<h2 *ngIf="products.length == 0 && loading == false" class="text-center mt-5">No products added</h2>
+
